@@ -24,14 +24,14 @@ for i in range(0,5):
 
     soup = BeautifulSoup(page, 'html.parser')
 
-    mydivs = soup.select('div.tiktok-yz6ijl-DivWrapper.e1u9v4ua1')
+    mydivs = soup.select('div.tiktok-yz6ijl-DivWrapper.e1u9v4ua1')   # go url, detail page
 
     def get_video_upload_info(video_url):
         response_video = requests.request("GET", video_url, headers=headers)
         video_page  = response_video._content
         soup_video = BeautifulSoup(video_page, 'html.parser')
-        video_a = soup_video.select_one('a.tiktok-12dba99-StyledAuthorAnchor.e10yw27c1')
-        return video_a.contents[-1]
+        video_a = soup_video.select_one('a.tiktok-12dba99-StyledAuthorAnchor.e10yw27c1')   # like  hypergamer/Hypergamer 15h ago
+        return video_a.contents[-1]         #  like 15h ago
 
     def parse_view_info(view_string):
         views = ""
@@ -73,8 +73,8 @@ for i in range(0,5):
         file = open("data-from-tiktok.txt", "a")
         file.write("\n\n"+"Link: "+a_element['href']+"\n")
         file.close()
-        video_upload_string = get_video_upload_info(video_url)
-        print(video_upload_string)
+        video_upload_string = get_video_upload_info(video_url)    # returned 15h
+        print(video_upload_string)     # written 15h ago
         file = open("data-from-tiktok.txt", "a")
         file.write(video_upload_string+"\n")
         file.close()
